@@ -1,0 +1,9 @@
+[configuration]
+entry_symbol = "aynthor_library_init"
+compatibility_minimum = "4.2"
+
+[libraries]
+android.debug.arm64 = "res://addons/AynThor/bin/libaynthor_native.so"
+android.release.arm64 = "res://addons/AynThor/bin/libaynthor_native.so"
+windows.debug.x86_64 = "res://addons/AynThor/bin/libaynthor_native.dll"
+windows.release.x86_64 = "res://addons/AynThor/bin/libaynthor_native.dll"
