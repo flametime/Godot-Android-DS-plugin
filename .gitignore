@@ -1,0 +1,4 @@
+.build_cache/
+.scons_cache/
+*.os
+*.obj

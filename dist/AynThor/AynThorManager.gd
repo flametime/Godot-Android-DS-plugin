@@ -1,6 +1,6 @@
 extends Node
 
-@export_group("Viewports (Must be SubViewports!)")
+@export_group("Screens")
 @export var main_screen: Screen
 @export var second_screen: Screen
 
