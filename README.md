@@ -1,6 +1,6 @@
-# AynThor: Dual Screen GDExtension Plugin
+# Dual Screen GDExtension Plugin
 
-AynThor is a powerful Godot plugin designed to handle multiple screens on Android handhelds like **Ayn Thor**, **Retroid Pocket 5**, and **RG DS**. It provides a low-latency Vulkan-based renderer to project a secondary viewport onto a physical second display.
+This is a powerful Godot plugin designed to handle multiple screens on Android handhelds like **Ayn Thor**, **Retroid Pocket 5**, and **RG DS**. It provides a low-latency Vulkan-based renderer to project a secondary viewport onto a physical second display.
 
 ---
 
@@ -45,7 +45,7 @@ If you don't want to wrap your entire game into `SubViewportContainers`, you can
 
 ## How it Works
 
-AynThor uses a hybrid architecture to bridge Godot's Rendering Device with Android's Presentation API:
+Plugin uses a hybrid architecture to bridge Godot's Rendering Device with Android's Presentation API:
 
 1.  **Android Layer (Kotlin)**: Detects secondary displays and creates a `Presentation` window with a `SurfaceView`.
 2.  **JNI Bridge (C++)**: Passes the native `ANativeWindow` handle from the Android Surface to the GDExtension.
