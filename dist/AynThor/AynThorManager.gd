@@ -4,6 +4,18 @@ extends Node
 @export var main_screen: Screen
 @export var second_screen: Screen
 
+@export var target_fps: int = 0:
+	set(value):
+		target_fps = value
+		if renderer:
+			renderer.set_target_fps(value)
+
+@export var rotation_degrees: ScreenRotation = ScreenRotation.DEG_180:
+	set(value):
+		rotation_degrees = value
+		if renderer:
+			renderer.set_rotation_degrees(value)
+			
 var _main_viewport: SubViewport
 var _second_viewport: SubViewport
 var _main_container: SubViewportContainer
@@ -50,6 +62,8 @@ func _ready():
 			renderer = ClassDB.instantiate("AynThorRenderer")
 			add_child(renderer)
 			renderer.name = "AynThorRenderer"
+		renderer.set_target_fps(target_fps)
+		renderer.set_rotation_degrees(rotation_degrees)
 	
 	original_main_size = get_viewport().size
 	if original_main_size.x == 0:
@@ -171,3 +185,10 @@ func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		if ayn_thor_plugin:
 			ayn_thor_plugin.destroy_screen()
+
+enum ScreenRotation {
+	DEG_0 = 0,
+	DEG_90 = 90,
+	DEG_180 = 180,
+	DEG_270 = 270
+}

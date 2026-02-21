@@ -1,4 +1,5 @@
 .build_cache/
 .scons_cache/
+.gradle_cache/
 *.os
 *.obj

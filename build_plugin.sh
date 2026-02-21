@@ -18,6 +18,10 @@ mkdir -p $SCONS_CACHE
 mkdir -p $DIST_DIR/bin/debug
 mkdir -p $DIST_DIR/bin/release
 
+GRADLE_CACHE="/build/.gradle_cache"
+mkdir -p $GRADLE_CACHE
+export GRADLE_USER_HOME=$GRADLE_CACHE
+
 echo -e "\033[0;32m--- Fast C++ Build (Only Plugin Source) ---\033[0m"
 cp -r /build/CPP/* $WORK_DIR/cpp/src/
 rm -f $WORK_DIR/cpp/src/*.os $WORK_DIR/cpp/src/*.obj
@@ -73,8 +77,6 @@ cat <<EOF > $KOTLIN_DIR/src/main/AndroidManifest.xml
 EOF
 
 cd $KOTLIN_DIR
-rm -rf build .gradle
-rm -rf /root/.gradle/caches
 if [ ! -f "godot-lib.aar" ]; then
     echo -e "\033[0;32m--- Downloading Godot Library ($GODOT_TAG) ---\033[0m"
     wget -q "https://github.com/godotengine/godot/releases/download/$GODOT_TAG/godot-lib.$GODOT_URL_VERSION.template_release.aar" -O godot-lib.aar

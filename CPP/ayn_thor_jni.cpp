@@ -5,12 +5,15 @@
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 #include <android/window.h>
+#include <mutex>
 
 ANativeWindow* g_second_window = nullptr;
+std::mutex g_window_mutex;
 
 extern "C" {
 
     JNIEXPORT void JNICALL Java_org_godot_plugins_aynthor_AynThorPlugin_nativeSetSurface(JNIEnv* env, jobject clazz, jobject surface) {
+        std::lock_guard<std::mutex> lock(g_window_mutex);
         if (g_second_window) {
             ANativeWindow_release(g_second_window);
         }
@@ -23,6 +26,7 @@ extern "C" {
     }
 
     JNIEXPORT void JNICALL Java_org_godot_plugins_aynthor_AynThorPlugin_nativeRemoveSurface(JNIEnv* env, jobject clazz) {
+        std::lock_guard<std::mutex> lock(g_window_mutex);
         if (g_second_window) {
             ANativeWindow_release(g_second_window);
             g_second_window = nullptr;
@@ -30,5 +34,7 @@ extern "C" {
     }
 }
 #else
+#include <mutex>
 void* g_second_window = nullptr;
+std::mutex g_window_mutex;
 #endif
